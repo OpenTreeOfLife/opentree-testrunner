@@ -26,5 +26,8 @@ resp = requests.post(SUBMIT_URI,
 sys.stderr.write('Sent POST to %s\n' %(resp.url))
 resp.raise_for_status()
 results = resp.json
-print type(results)
-print json.dumps(results, sort_keys=True, indent=4)
+if isinstance(results, unicode) or isinstance(results, str):
+    print json.dumps(eval(results), sort_keys=True, indent=4)
+    sys.exit('Getting JavaScript string. Object expected.')
+else:
+    print json.dumps(results, sort_keys=True, indent=4)
