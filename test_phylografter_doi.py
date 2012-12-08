@@ -8,26 +8,31 @@ using the requests package for python
 '''
 import sys
 import requests
-RETURNS_OBJECT = False
-if RETURNS_OBJECT:
-    import json
+import json
+from opentreetesting import config
+try:
+    should_fail = (sys.argv[1] == '0')
+except:
+    should_fail = False
+DOMAIN = config('host', 'phylografterapp')
+for doi in sys.stdin:
+    SUBMIT_URI = DOMAIN + '/study/ref_from_doi/' + doi.strip() + '.json'
+    print 'Looking up "%s" at  %s ' % (doi.strip(),SUBMIT_URI)
+    try:
+        resp = requests.get(SUBMIT_URI)
+        resp.raise_for_status()
+        print json.dumps(resp.json, sort_keys=True, indent=4)
+    except Exception as x:
+        print x
+        if not should_fail:
+            sys.exit(1)
+    else:
+        if should_fail:
+            sys.exit('DOI expected to fail, but did not\n')
+    
 
-def normalize_doi_for_url(raw):
-    '''Take a DOI which may start with doi or doi: and return the DOI needed
-    for URL construction.
-    '''
-    if raw.startswith('doi:'):
-        raw = raw[4:]
-    elif raw.startswith('doi'):
-        raw = raw[3:]
-    return raw
+'''
 
-
-DOMAIN = 'http://dx.doi.org'
-
-doi = normalize_doi_for_url(sys.argv[1])
-
-SUBMIT_URI = DOMAIN + '/' + doi
 
 payload = {
 }
@@ -43,10 +48,6 @@ else:
     requested_formats = "Bibliographic citation (text; style=APA)"
 
 sys.stderr.write('Sending GET to "%s"\n' % (SUBMIT_URI))
-resp = requests.get(SUBMIT_URI,
-                    params=payload,
-                    headers=headers,
-                    allow_redirects=True)
 sys.stderr.write('Sent GET to %s\n' %(resp.url))
 if resp.status_code == 404:
     sys.stderr.write('Requested DOI, "%s", does not exist\n' % doi)
@@ -63,3 +64,4 @@ if RETURNS_OBJECT:
     print json.dumps(results, sort_keys=True, indent=4)
 else:
     print resp.text
+'''

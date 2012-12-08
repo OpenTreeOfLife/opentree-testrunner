@@ -1,2 +1,3 @@
 [host]
 tnrshost = http://opentree-dev.bio.ku.edu:7474
+phylografterapp = http://www.reelab.net/phylografter
