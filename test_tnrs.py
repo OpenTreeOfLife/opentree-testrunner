@@ -10,7 +10,8 @@ DOMAIN = config('host', 'tnrshost')
 
 SUBMIT_URI = DOMAIN + '/db/data/ext/TNRS/graphdb/doTNRSForNames'
 payload = {
-    "queryString" : "Pan trodlogytes, Homo sapphire, Plantago, Morpho peleides, Eleocharis"
+    "queryString": "Pan trodlogytes, Homo sapphire, Plantago, Morpho peleides, Eleocharis",
+    "contextName": "All life"
 }
 if len(sys.argv) > 1:
     payload['queryString'] = ', '.join(sys.argv[1:])
@@ -18,14 +19,19 @@ if len(sys.argv) > 1:
 headers = {
     'content-type' : 'application/json',
     'accept' : 'application/json',
-    }
+}
 resp = requests.post(SUBMIT_URI,
                      headers=headers,
                      data=json.dumps(payload),
                      allow_redirects=True)
 sys.stderr.write('Sent POST to %s\n' %(resp.url))
 resp.raise_for_status()
-results = resp.json
+try:
+    results = resp.json()
+    print 'results =', str(results)
+except:
+    print 'Non json resp is:', resp.text
+    sys.exit(1)
 if isinstance(results, unicode) or isinstance(results, str):
     print "repr(res.json)=>  %s" % repr(results)
     er = eval(results)

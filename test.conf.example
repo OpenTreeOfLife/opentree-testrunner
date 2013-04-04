@@ -1,3 +1,7 @@
 [host]
-tnrshost = http://opentree-dev.bio.ku.edu:7474
+# endpoint for TNRS web services
+tnrshost = http://opentree-dev.bio.ku.edu:7476
+
+# endpoint for GoL web services
+golshost = http://opentree-dev.bio.ku.edu:7474
 phylografterapp = http://www.reelab.net/phylografter
