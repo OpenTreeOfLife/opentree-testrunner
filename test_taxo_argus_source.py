@@ -32,7 +32,7 @@ sys.stderr.write('Sent POST to %s\n' %(resp.url))
 resp.raise_for_status()
 try:
     results = resp.json()
-    print 'results =', str(results)
+    #print 'results =', str(results)
 except:
     print 'Non json resp is:', resp.text
     sys.exit(1)
