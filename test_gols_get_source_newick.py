@@ -7,11 +7,11 @@ DOMAIN = config('host', 'golshost')
 
 
 
-SUBMIT_URI = DOMAIN + '/db/data/ext/GoLS/graphdb/getSourceTreeIDs'
-payload = {}
-#if len(sys.argv) > 1:
-#    payload['queryString'] = ', '.join(sys.argv[1:])
-
+SUBMIT_URI = DOMAIN + '/db/data/ext/GoLS/graphdb/getSourceTreeNewick'
+payload = {'souretreeid': 'WangEtAl2009-studyid-15'
+}
+if len(sys.argv) > 1:
+    payload['souretreeid'] = sys.argv[1:]
 headers = {
     'content-type' : 'application/json',
     'accept' : 'application/json',
@@ -28,11 +28,4 @@ try:
 except:
     print 'Non json resp is:', resp.text
     sys.exit(1)
-if isinstance(results, unicode) or isinstance(results, str):
-    print "repr(res.json)=>  %s" % repr(results)
-    er = eval(results)
-    print type(er)
-    print json.dumps(er, sort_keys=True, indent=4)
-    sys.exit('Getting JavaScript string. Object expected.')
-else:
-    print json.dumps(results, sort_keys=True, indent=4)
+print results
