@@ -7,7 +7,7 @@ DOMAIN = config('host', 'golshost')
 SUBMIT_URI = DOMAIN + '/db/data/ext/GoLS/graphdb/getSourceTree'
 payload = {
     'treeID' : '4',
-    'format' : 'newick'
+    'format' : 'arguson'
 }
 if len(sys.argv) > 1:
     payload['treeID'] = sys.argv[1:]
