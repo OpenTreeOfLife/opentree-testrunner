@@ -9,7 +9,7 @@ using the requests package for python
 import sys
 import requests
 import json
-from opentreetesting import config
+from opentreetesting import config, summarize_json_response
 try:
     should_fail = (sys.argv[1] == '0')
 except:
@@ -58,10 +58,5 @@ if resp.status_code == 406:
 if resp.status_code == 204:
     sys.stderr.write('DOI found, but no bibliographic information was available')
     sys.exit(3)
-resp.raise_for_status()
-if RETURNS_OBJECT:
-    results = resp.json
-    print json.dumps(results, sort_keys=True, indent=4)
-else:
-    print resp.text
+summarize_json_response(resp) or sys.exit(1)
 '''

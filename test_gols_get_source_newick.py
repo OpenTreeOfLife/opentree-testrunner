@@ -2,16 +2,14 @@
 import sys
 import requests
 import json
-from opentreetesting import config
+from opentreetesting import config, summarize_json_response
 DOMAIN = config('host', 'golshost')
-
-
-
 SUBMIT_URI = DOMAIN + '/db/data/ext/GoLS/graphdb/getSourceTreeNewick'
-payload = {'souretreeid': 'WangEtAl2009-studyid-15'
+payload = {
+    'treeID' : '4'
 }
 if len(sys.argv) > 1:
-    payload['souretreeid'] = sys.argv[1:]
+    payload['treeID'] = sys.argv[1:]
 headers = {
     'content-type' : 'application/json',
     'accept' : 'application/json',
@@ -20,12 +18,4 @@ resp = requests.post(SUBMIT_URI,
                      headers=headers,
                      data=json.dumps(payload),
                      allow_redirects=True)
-sys.stderr.write('Sent POST to %s\n' %(resp.url))
-resp.raise_for_status()
-try:
-    results = resp.json()
-    print 'results =', str(results)
-except:
-    print 'Non json resp is:', resp.text
-    sys.exit(1)
-print results
+summarize_json_response(resp) or sys.exit(1)

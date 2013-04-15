@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, sys
+import os, sys, json
 from ConfigParser import SafeConfigParser
 
 _CONFIG = None
@@ -25,3 +25,21 @@ def config(section=None, param=None):
     except:
         sys.stderr.write('Config file "%s" does not contain option "%s in section "%s"\n' % (_CONFIG_FN, param, section))
         return None
+
+def summarize_json_response(resp):
+    sys.stderr.write('Sent POST to %s\n' %(resp.url))
+    resp.raise_for_status()
+    try:
+        results = resp.json()
+    except:
+        print 'Non json resp is:', resp.text
+        return False
+    if isinstance(results, unicode) or isinstance(results, str):
+        print "repr(res.json)=>  %s" % repr(results)
+        er = eval(results)
+        print type(er)
+        print json.dumps(er, sort_keys=True, indent=4)
+        sys.stderr.write('Getting JavaScript string. Object expected.\n')
+        return False
+    print json.dumps(results, sort_keys=True, indent=4)
+    return True
