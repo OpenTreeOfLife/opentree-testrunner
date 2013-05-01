@@ -11,7 +11,7 @@ payload = {
     'maxDepth' : 4
 }
 if len(sys.argv) > 1:
-    payload['treeID'] = sys.argv[1:]
+    payload['subtreeNodeID'] = sys.argv[1]
 headers = {
     'content-type' : 'application/json',
     'accept' : 'application/json',
