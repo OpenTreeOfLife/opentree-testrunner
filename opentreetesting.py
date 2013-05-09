@@ -36,7 +36,7 @@ def summarize_json_response(resp):
         return False
     if isinstance(results, unicode) or isinstance(results, str):
         print "repr(res.json)=>  %s" % repr(results)
-        er = eval(results)
+        er = json.loads(results)
         print type(er)
         print json.dumps(er, sort_keys=True, indent=4)
         sys.stderr.write('Getting JavaScript string. Object expected.\n')
