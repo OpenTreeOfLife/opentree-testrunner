@@ -2,10 +2,10 @@
 import sys
 import requests
 import json
-#curl -X POST http://opentree-dev.bio.ku.edu:7474/db/data/ext/TNRS/graphdb/doTNRSForNames -H "Content-Type: Application/json" -d '{"queryString": "Pan trodlogytes, Homo sapphire, Plantago, Morpho peleides, Eleocharis"}'
+#curl -X POST http://opentree-dev.bio.ku.edu:7474/ext/TNRS/graphdb/doTNRSForNames -H "Content-Type: Application/json" -d '{"queryString": "Pan trodlogytes, Homo sapphire, Plantago, Morpho peleides, Eleocharis"}'
 from opentreetesting import config, summarize_json_response
 DOMAIN = config('host', 'tnrshost')
-prefix = DOMAIN + "/db/data/ext/GetJsons/node/";
+prefix = DOMAIN + "/ext/GetJsons/node/";
 suffix = "/getConflictTaxJsonAltRel";
 # @TEMP assuming ottol
 if len(sys.argv) == 1:

@@ -2,13 +2,13 @@
 import sys
 import requests
 import json
-#curl -X POST http://opentree-dev.bio.ku.edu:7474/db/data/ext/TNRS/graphdb/doTNRSForNames -H "Content-Type: Application/json" -d '{"queryString": "Pan trodlogytes, Homo sapphire, Plantago, Morpho peleides, Eleocharis"}'
+#curl -X POST http://opentree-dev.bio.ku.edu:7474/ext/TNRS/graphdb/doTNRSForNames -H "Content-Type: Application/json" -d '{"queryString": "Pan trodlogytes, Homo sapphire, Plantago, Morpho peleides, Eleocharis"}'
 from opentreetesting import config
 DOMAIN = config('host', 'tnrshost')
 
 
 
-SUBMIT_URI = DOMAIN + '/db/data/ext/TNRS/graphdb/doTNRSForNames'
+SUBMIT_URI = DOMAIN + '/ext/TNRS/graphdb/doTNRSForNames'
 payload = {
     "queryString": "Pan trodlogytes, Homo sapphire, Plantago, Morpho peleides, Eleocharis",
     "contextName": "All life"

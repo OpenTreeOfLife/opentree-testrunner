@@ -4,7 +4,7 @@ import requests
 import json
 from opentreetesting import config, summarize_json_response
 DOMAIN = config('host', 'golshost')
-SUBMIT_URI = DOMAIN + '/db/data/ext/GoLS/graphdb/getSyntheticTree'
+SUBMIT_URI = DOMAIN + '/ext/GoLS/graphdb/getSyntheticTree'
 payload = {
     'treeID' : 'otol.draft.22',
     'format' : 'arguson', 
