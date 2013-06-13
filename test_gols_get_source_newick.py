@@ -4,7 +4,10 @@ import requests
 import json
 from opentreetesting import config, summarize_json_response
 DOMAIN = config('host', 'golshost')
-SUBMIT_URI = DOMAIN + '/ext/GoLS/graphdb/getSourceTree'
+p = '/ext/GoLS/graphdb/getSourceTree'
+if DOMAIN.startswith('http://127.0.0.1'):
+    p = '/db/data' + p
+SUBMIT_URI = DOMAIN + p
 payload = {
     'treeID' : '4',
     'format' : 'newick'

@@ -4,11 +4,14 @@ import requests
 import json
 from opentreetesting import config, summarize_json_response
 DOMAIN = config('host', 'golshost')
-SUBMIT_URI = DOMAIN + '/ext/GoLS/graphdb/getSyntheticTree'
+p = '/ext/GoLS/graphdb/getSyntheticTree'
+if DOMAIN.startswith('http://127.0.0.1'):
+    p = '/db/data' + p
+SUBMIT_URI = DOMAIN + p
 payload = {
     'treeID' : 'otol.draft.22',
     'format' : 'arguson', 
-    'maxDepth' : 4
+    'maxDepth' : 2
 }
 if len(sys.argv) > 1:
     payload['subtreeNodeID'] = sys.argv[1]
