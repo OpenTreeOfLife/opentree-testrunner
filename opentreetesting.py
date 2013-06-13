@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os, sys, json
 from ConfigParser import SafeConfigParser
+import gzip
+from cStringIO import StringIO
 
 _CONFIG = None
 _CONFIG_FN = None
@@ -27,7 +29,7 @@ def config(section=None, param=None):
         return None
 
 def summarize_json_response(resp):
-    sys.stderr.write('Sent POST to %s\n' %(resp.url))
+    sys.stderr.write('Sent request to %s\n' %(resp.url))
     resp.raise_for_status()
     try:
         results = resp.json()
@@ -43,3 +45,21 @@ def summarize_json_response(resp):
         return False
     print json.dumps(results, sort_keys=True, indent=4)
     return True
+
+def summarize_gzipped_json_response(resp):
+    sys.stderr.write('Sent request to %s\n' %(resp.url))
+    resp.raise_for_status()
+    try:
+        uncompressed = gzip.GzipFile(mode='rb', fileobj=StringIO(resp.content)).read()
+        results = uncompressed
+    except:
+        raise 
+    if isinstance(results, unicode) or isinstance(results, str):
+        print "repr(res.json)=>  %s" % repr(results)
+        er = json.loads(results)
+        print type(er)
+        print json.dumps(er, sort_keys=True, indent=4)
+        return True
+    else:
+        print 'Non gzipped response, but not a string is:', results
+        return False
