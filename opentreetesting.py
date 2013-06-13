@@ -55,9 +55,7 @@ def summarize_gzipped_json_response(resp):
     except:
         raise 
     if isinstance(results, unicode) or isinstance(results, str):
-        print "repr(res.json)=>  %s" % repr(results)
         er = json.loads(results)
-        print type(er)
         print json.dumps(er, sort_keys=True, indent=4)
         return True
     else:
