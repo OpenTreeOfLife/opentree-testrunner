@@ -1,6 +1,6 @@
 [host]
 # endpoint for TNRS web services
-tnrshost = http://dev.opentreeoflife.org/taxomachine
+tnrshost = http://api.opentreeoflife.org/taxomachine
 
 # endpoint for GoL web services
 golshost = http://dev.opentreeoflife.org/treemachine
