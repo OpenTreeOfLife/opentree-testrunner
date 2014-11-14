@@ -1,2 +1,4 @@
 *.pyc
-test.confenv
+test.conf
+env
+
