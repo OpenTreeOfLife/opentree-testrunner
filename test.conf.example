@@ -4,4 +4,3 @@ tnrshost = http://api.opentreeoflife.org/taxomachine
 
 # endpoint for GoL web services
 golshost = http://dev.opentreeoflife.org/treemachine
-phylografterapp = http://www.reelab.net/phylografter
