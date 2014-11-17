@@ -1,6 +1,5 @@
-[host]
-# endpoint for TNRS web services
-tnrshost = http://api.opentreeoflife.org/taxomachine
-
-# endpoint for GoL web services
-golshost = http://dev.opentreeoflife.org/treemachine
+[apis]
+phylesystem_api = http://devapi.opentreeoflife.org
+oti = http://devapi.opentreeoflife.org
+taxomachine = http://devapi.opentreeoflife.org
+treemachine = http://devapi.opentreeoflife.org

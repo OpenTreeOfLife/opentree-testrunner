@@ -22,10 +22,4 @@ Settings
 "test.conf" is read using Python's config parser. So to see the syntax rules
 refer to http://docs.python.org/library/configparser.html
 
-Please add a note below if you add an option.
-
-
-#### "host" Section #####
-
-* `tnrshost` hostname and port for the server running the TNRS services.
-
+See the peyotl repo wiki for details on the config options: https://github.com/OpenTreeOfLife/peyotl/wiki/configuration 
